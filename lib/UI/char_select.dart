@@ -3,11 +3,11 @@ import 'package:flutter/rendering.dart';
 import 'set_card.dart';
 
 class CharPage extends StatelessWidget {
-  void navigateToCardSet(context) {
+  void navigateToCardSet(context, name) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => Cardsets(),
+        builder: (context) => Cardsets(name),
       ),
     );
   }
@@ -39,8 +39,8 @@ class CharPage extends StatelessWidget {
                     ),
                     Hero(
                       tag: '1',
-                      child: Image.asset(
-                        'assets/hammam_kemeja1.jpg',
+                      child: Container(
+                        color: Colors.blue,
                         height: 400,
                       ),
                     ),
@@ -50,7 +50,7 @@ class CharPage extends StatelessWidget {
                     RaisedButton(
                       child: Text('Select'),
                       onPressed: () {
-                        navigateToCardSet(context);
+                        navigateToCardSet(context, 'yugi');
                       },
                     )
                   ],
@@ -70,15 +70,21 @@ class CharPage extends StatelessWidget {
                     SizedBox(
                       height: 20,
                     ),
-                    Placeholder(
-                      fallbackHeight: 400,
+                    Hero(
+                      tag: '2',
+                      child: Container(
+                        color: Colors.green,
+                        height: 400,
+                      ),
                     ),
                     SizedBox(
                       height: 20,
                     ),
                     RaisedButton(
                       child: Text('Select'),
-                      onPressed: () {},
+                      onPressed: () {
+                        navigateToCardSet(context, 'kaiba');
+                      },
                     )
                   ],
                 ),
@@ -97,15 +103,21 @@ class CharPage extends StatelessWidget {
                     SizedBox(
                       height: 20,
                     ),
-                    Placeholder(
-                      fallbackHeight: 400,
+                    Hero(
+                      tag: '3',
+                      child: Container(
+                        color: Colors.red,
+                        height: 400,
+                      ),
                     ),
                     SizedBox(
                       height: 20,
                     ),
                     RaisedButton(
                       child: Text('Select'),
-                      onPressed: () {},
+                      onPressed: () {
+                        navigateToCardSet(context, 'joey');
+                      },
                     )
                   ],
                 ),

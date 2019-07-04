@@ -1,3 +1,4 @@
+
 List yugiCard = [
   "Duelist Pack: Yugi",
   "Legendary Collection 3: Yugi's World",
@@ -23,4 +24,4 @@ List kaibaCard = [
   "Yugi & Kaiba Collector Box"
 ];
 
-List joeyCard = [1, 2, 3];
+List joeyCard = ['1', '2', '3'];

@@ -6,7 +6,6 @@ import 'package:yugicardsets/UI/char_select.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  
   final color = Colors.red;
 
   @override
