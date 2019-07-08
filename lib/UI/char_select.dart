@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:yugicardsets/model/set_card_model.dart';
 import 'set_card.dart';
 
 class CharPage extends StatelessWidget {
   void navigateToCardSet(context, name) {
+    charCheck = name;
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => Cardsets(name),
+        builder: (context) => Cardsets(),
       ),
     );
   }
@@ -15,11 +17,20 @@ class CharPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Select Character'),
+        centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.close, color: Colors.white),
+            onPressed: () {},
+          )
+        ],
+      ),
       body: Center(
         child: Container(
           alignment: Alignment.bottomCenter,
           color: Colors.yellow,
-          height: 600,
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: <Widget>[
@@ -27,7 +38,7 @@ class CharPage extends StatelessWidget {
                 padding: EdgeInsets.all(30),
                 alignment: Alignment.topCenter,
                 width: 300,
-                color: Colors.red,
+                color: Colors.red[700],
                 child: Column(
                   children: <Widget>[
                     Text(
@@ -45,7 +56,7 @@ class CharPage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 50,
                     ),
                     RaisedButton(
                       child: Text('Select'),
@@ -60,7 +71,7 @@ class CharPage extends StatelessWidget {
                 padding: EdgeInsets.all(30),
                 alignment: Alignment.topCenter,
                 width: 300,
-                color: Colors.blue,
+                color: Colors.blue[700],
                 child: Column(
                   children: <Widget>[
                     Text(
@@ -78,7 +89,7 @@ class CharPage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 50,
                     ),
                     RaisedButton(
                       child: Text('Select'),
@@ -93,7 +104,7 @@ class CharPage extends StatelessWidget {
                 padding: EdgeInsets.all(30),
                 alignment: Alignment.topCenter,
                 width: 300,
-                color: Colors.green,
+                color: Colors.green[700],
                 child: Column(
                   children: <Widget>[
                     Text(
@@ -111,7 +122,7 @@ class CharPage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 50,
                     ),
                     RaisedButton(
                       child: Text('Select'),

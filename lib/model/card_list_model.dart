@@ -14,8 +14,9 @@ class CardDetail {
   String name;
   String type;
   String desc;
-  String race;
-  String archetype;
+  String atk;
+  String def;
+  String level;
   List<CardSet> cardSets;
   List<CardImage> cardImages;
   CardPrices cardPrices;
@@ -25,8 +26,6 @@ class CardDetail {
     this.name,
     this.type,
     this.desc,
-    this.race,
-    this.archetype,
     this.cardSets,
     this.cardImages,
     this.cardPrices,
@@ -37,8 +36,6 @@ class CardDetail {
         name: json["name"],
         type: json["type"],
         desc: json["desc"],
-        race: json["race"],
-        archetype: json["archetype"],
         cardSets: new List<CardSet>.from(
             json["card_sets"].map((x) => CardSet.fromJson(x))),
         cardImages: new List<CardImage>.from(
@@ -51,8 +48,6 @@ class CardDetail {
         "name": name,
         "type": type,
         "desc": desc,
-        "race": race,
-        "archetype": archetype,
         "card_sets": new List<dynamic>.from(cardSets.map((x) => x.toJson())),
         "card_images":
             new List<dynamic>.from(cardImages.map((x) => x.toJson())),

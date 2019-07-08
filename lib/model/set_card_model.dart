@@ -1,3 +1,4 @@
+String charCheck;
 
 List yugiCard = [
   "Duelist Pack: Yugi",

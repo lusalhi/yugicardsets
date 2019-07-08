@@ -15,7 +15,7 @@ class CardList extends StatefulWidget {
 class _CardListState extends State<CardList> {
   Future<List<CardDetail>> fetchInventPosts() async {
     final response = await http.get(
-        'https://db.ygoprodeck.com/api/v5/cardinfo.php?set=${widget.link}');
+        'https://db.ygoprodeck.com/api/v5/cardinfo.php?set=${widget.link}&sort=type&sort=atk');
     // compute function to run parsePosts in a separate isolate
     cardDetail = cardFromJson(response.body);
     return cardDetail;
@@ -39,21 +39,21 @@ class _CardListState extends State<CardList> {
           return ListView.builder(
             itemCount: cardDetail.length,
             itemBuilder: (context, index) {
-              return ListTile(
-                leading: CircleAvatar(
-                  child: Text(
-                    (index + 1).toString(),
-                  ),
+              return Card(
+                child: ListTile(
+                  leading: Image.network(
+                      cardDetail[index].cardImages[0].imageUrlSmall),
+                  title: Text(cardDetail[index].name),
+                  trailing: Icon(Icons.chevron_right),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailCard(index),
+                      ),
+                    );
+                  },
                 ),
-                title: Text(cardDetail[index].name),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => DetailCard(index),
-                    ),
-                  );
-                },
               );
             },
           );

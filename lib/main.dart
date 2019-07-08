@@ -6,14 +6,13 @@ import 'package:yugicardsets/UI/char_select.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  final color = Colors.red;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: color,
+        primarySwatch: Colors.blue,
       ),
       home: CharPage(),
     );

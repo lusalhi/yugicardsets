@@ -3,8 +3,6 @@ import 'package:yugicardsets/model/set_card_model.dart';
 import 'list_card.dart';
 
 class Cardsets extends StatelessWidget {
-  final charName;
-  Cardsets(this.charName);
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +12,12 @@ class Cardsets extends StatelessWidget {
           SliverAppBar(
             flexibleSpace: FlexibleSpaceBar(
               background: Hero(
-                child: charName == 'yugi'
+                child: charCheck == 'yugi'
                     ? Container(
                         height: 500,
                         color: Colors.blue,
                       )
-                    : charName == 'kaiba'
+                    : charCheck == 'kaiba'
                         ? Container(
                             height: 500,
                             color: Colors.green,
@@ -28,11 +26,11 @@ class Cardsets extends StatelessWidget {
                             height: 500,
                             color: Colors.red,
                           ),
-                tag: charName == 'yugi' ? "1" : charName == 'kaiba' ? "2" : "3",
+                tag: charCheck == 'yugi' ? "1" : charCheck == 'kaiba' ? "2" : "3",
               ),
-              title: Text(charName == 'yugi'
+              title: Text(charCheck == 'yugi'
                   ? "Yugi's Deck Collection"
-                  : charName == 'kaiba'
+                  : charCheck == 'kaiba'
                       ? "Kaiba's Deck Collection"
                       : "Joey's Deck Collection"),
               centerTitle: true,
@@ -44,17 +42,17 @@ class Cardsets extends StatelessWidget {
             delegate: SliverChildBuilderDelegate((context, index) {
               return ListTile(
                 contentPadding: EdgeInsets.all(10),
-                title: Text(charName == 'yugi'
+                title: Text(charCheck == 'yugi'
                     ? yugiCard[index]
-                    : charName == 'kaiba' ? kaibaCard[index] : joeyCard[index]),
+                    : charCheck == 'kaiba' ? kaibaCard[index] : joeyCard[index]),
                 trailing: Icon(Icons.chevron_right),
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => CardList(charName == 'yugi'
+                      builder: (context) => CardList(charCheck == 'yugi'
                           ? yugiCard[index]
-                          : charName == 'kaiba'
+                          : charCheck == 'kaiba'
                               ? kaibaCard[index]
                               : joeyCard[index]),
                     ),
@@ -62,9 +60,9 @@ class Cardsets extends StatelessWidget {
                 },
               );
             },
-                childCount: charName == 'yugi'
+                childCount: charCheck == 'yugi'
                     ? yugiCard.length
-                    : charName == 'kaiba' ? kaibaCard.length : joeyCard.length),
+                    : charCheck == 'kaiba' ? kaibaCard.length : joeyCard.length),
           )
         ],
       ),
