@@ -14,6 +14,96 @@ class CharPage extends StatelessWidget {
     );
   }
 
+  Widget yugiContainer(context) {
+    return Container(
+      padding: EdgeInsets.all(30),
+      width: 300,
+      color: Colors.red[700],
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text(
+            'Yami Yugi',
+            style: TextStyle(fontSize: 35.0, color: Colors.white),
+          ),
+          Hero(
+            tag: '1',
+            child: Image.network(
+              'https://uploads3.yugioh.com/character/3/detail/detail/yamiyugi-l.png?1371744397',
+              height: 300,
+            ),
+          ),
+          RaisedButton(
+            child: Text('Select'),
+            onPressed: () {
+              navigateToCardSet(context, 'yugi');
+            },
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget kaibaContainer(context) {
+    return Container(
+      padding: EdgeInsets.all(30),
+      width: 300,
+      color: Colors.blue[700],
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text(
+            'Seto Kaiba',
+            style: TextStyle(fontSize: 35.0, color: Colors.white),
+          ),
+          Hero(
+            tag: '2',
+            child: Image.network(
+              'https://uploads4.yugioh.com/character/11/detail/detail/kaib-l.png?1375717119',
+              height: 300,
+            ),
+          ),
+          RaisedButton(
+            child: Text('Select'),
+            onPressed: () {
+              navigateToCardSet(context, 'kaiba');
+            },
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget joeyContainer(context) {
+    return Container(
+      padding: EdgeInsets.all(30),
+      width: 300,
+      color: Colors.green[700],
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text(
+            'Joey Wheeler',
+            style: TextStyle(fontSize: 35.0, color: Colors.white),
+          ),
+          Hero(
+            tag: '3',
+            child: Image.network(
+              'https://uploads2.yugioh.com/character/5/detail/detail/joey-l.png?1375717061',
+              height: 300,
+            ),
+          ),
+          RaisedButton(
+            child: Text('Select'),
+            onPressed: () {
+              navigateToCardSet(context, 'joey');
+            },
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,114 +117,14 @@ class CharPage extends StatelessWidget {
           )
         ],
       ),
-      body: Center(
-        child: Container(
-          alignment: Alignment.bottomCenter,
-          color: Colors.yellow,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.all(30),
-                alignment: Alignment.topCenter,
-                width: 300,
-                color: Colors.red[700],
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                      'Yugi',
-                      style: TextStyle(fontSize: 30.0),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Hero(
-                      tag: '1',
-                      child: Container(
-                        color: Colors.blue,
-                        height: 400,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    RaisedButton(
-                      child: Text('Select'),
-                      onPressed: () {
-                        navigateToCardSet(context, 'yugi');
-                      },
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.all(30),
-                alignment: Alignment.topCenter,
-                width: 300,
-                color: Colors.blue[700],
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                      'Kaiba',
-                      style: TextStyle(fontSize: 30.0),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Hero(
-                      tag: '2',
-                      child: Container(
-                        color: Colors.green,
-                        height: 400,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    RaisedButton(
-                      child: Text('Select'),
-                      onPressed: () {
-                        navigateToCardSet(context, 'kaiba');
-                      },
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.all(30),
-                alignment: Alignment.topCenter,
-                width: 300,
-                color: Colors.green[700],
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                      'Joey',
-                      style: TextStyle(fontSize: 30.0),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Hero(
-                      tag: '3',
-                      child: Container(
-                        color: Colors.red,
-                        height: 400,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    RaisedButton(
-                      child: Text('Select'),
-                      onPressed: () {
-                        navigateToCardSet(context, 'joey');
-                      },
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
+      body: Container(
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: <Widget>[
+            yugiContainer(context),
+            kaibaContainer(context),
+            joeyContainer(context)
+          ],
         ),
       ),
     );

@@ -15,8 +15,7 @@ class CardList extends StatefulWidget {
 class _CardListState extends State<CardList> {
   Future<List<CardDetail>> fetchInventPosts() async {
     final response = await http.get(
-        'https://db.ygoprodeck.com/api/v5/cardinfo.php?set=${widget.link}&sort=type&sort=atk');
-    // compute function to run parsePosts in a separate isolate
+        'https://db.ygoprodeck.com/api/v5/cardinfo.php?set=${widget.link}&sort=level');
     cardDetail = cardFromJson(response.body);
     return cardDetail;
   }
@@ -25,6 +24,37 @@ class _CardListState extends State<CardList> {
   void dispose() {
     super.dispose();
     cardDetail.clear();
+  }
+
+  navigate(context, index) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DetailCard(index),
+      ),
+    );
+  }
+
+  Widget listView() {
+    return ListView.builder(
+      itemCount: cardDetail.length,
+      itemBuilder: (context, index) {
+        return Card(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: ListTile(
+              leading:
+                  Image.network(cardDetail[index].cardImages[0].imageUrlSmall),
+              title: Text(cardDetail[index].name),
+              trailing: Icon(Icons.chevron_right),
+              onTap: () {
+                navigate(context, index);
+              },
+            ),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -36,27 +66,10 @@ class _CardListState extends State<CardList> {
       body: FutureBuilder(
         future: fetchInventPosts(),
         builder: (context, snapshot) {
-          return ListView.builder(
-            itemCount: cardDetail.length,
-            itemBuilder: (context, index) {
-              return Card(
-                child: ListTile(
-                  leading: Image.network(
-                      cardDetail[index].cardImages[0].imageUrlSmall),
-                  title: Text(cardDetail[index].name),
-                  trailing: Icon(Icons.chevron_right),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DetailCard(index),
-                      ),
-                    );
-                  },
-                ),
-              );
-            },
-          );
+          if (snapshot.hasData) {
+            return listView();
+          }
+          return Center(child: CircularProgressIndicator());
         },
       ),
     );
