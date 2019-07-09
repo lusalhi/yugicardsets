@@ -1,9 +1,36 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:yugicardsets/model/set_card_model.dart';
 import 'set_card.dart';
 
 class CharPage extends StatelessWidget {
+  void _showDialog(context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Exit Dialog'),
+            content: Text('Exit Application?'),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('OK'),
+                onPressed: () {
+                  exit(0);
+                },
+              ),
+              FlatButton(
+                child: Text('Cancel'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              )
+            ],
+          );
+        });
+  }
+
   void navigateToCardSet(context, name) {
     charCheck = name;
     Navigator.push(
@@ -113,7 +140,9 @@ class CharPage extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.close, color: Colors.white),
-            onPressed: () {},
+            onPressed: () {
+              _showDialog(context);
+            },
           )
         ],
       ),

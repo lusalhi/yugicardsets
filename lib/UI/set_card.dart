@@ -14,10 +14,8 @@ class Cardsets extends StatelessWidget {
   Widget flexibleSpace() {
     return FlexibleSpaceBar(
       title: Text(charCheck == 'yugi'
-          ? "Yugi's Deck Collection"
-          : charCheck == 'kaiba'
-              ? "Kaiba's Deck Collection"
-              : "Joey's Deck Collection"),
+          ? "Yugi's Card Set"
+          : charCheck == 'kaiba' ? "Kaiba's Card Set" : "Joey's Card Set"),
       centerTitle: true,
       background: Hero(
           tag: charCheck == 'yugi' ? "1" : charCheck == 'kaiba' ? "2" : "3",
@@ -38,29 +36,31 @@ class Cardsets extends StatelessWidget {
   Widget sliverList() {
     return SliverList(
       delegate: SliverChildBuilderDelegate((context, index) {
-        return ListTile(
-          contentPadding: EdgeInsets.all(10),
-          title: Text(charCheck == 'yugi'
-              ? yugiCard[index]
-              : charCheck == 'kaiba' ? kaibaCard[index] : joeyCard[index]),
-          trailing: Icon(Icons.chevron_right),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => CardList(charCheck == 'yugi'
-                    ? yugiCard[index]
-                    : charCheck == 'kaiba'
-                        ? kaibaCard[index]
-                        : joeyCard[index]),
-              ),
-            );
-          },
-        );
+        return _listTile(context, index);
       },
           childCount: charCheck == 'yugi'
               ? yugiCard.length
               : charCheck == 'kaiba' ? kaibaCard.length : joeyCard.length),
+    );
+  }
+
+  Widget _listTile(context, index) {
+    return ListTile(
+      contentPadding: EdgeInsets.all(10),
+      title: Text(charCheck == 'yugi'
+          ? yugiCard[index]
+          : charCheck == 'kaiba' ? kaibaCard[index] : joeyCard[index]),
+      trailing: Icon(Icons.chevron_right),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CardList(charCheck == 'yugi'
+                ? yugiCard[index]
+                : charCheck == 'kaiba' ? kaibaCard[index] : joeyCard[index]),
+          ),
+        );
+      },
     );
   }
 

@@ -25,4 +25,9 @@ List kaibaCard = [
   "Yugi & Kaiba Collector Box"
 ];
 
-List joeyCard = ['1', '2', '3'];
+List joeyCard = [
+  "Legendary Collection 4: Joey's World",
+  "Legendary Collection 4: Joey's World Mega Pack",
+  "Starter Deck: Joey",
+  "Yu-Gi-Oh! Power of Chaos: Joey the Passion promotional cards"
+];

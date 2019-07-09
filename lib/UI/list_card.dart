@@ -15,7 +15,7 @@ class CardList extends StatefulWidget {
 class _CardListState extends State<CardList> {
   Future<List<CardDetail>> fetchInventPosts() async {
     final response = await http.get(
-        'https://db.ygoprodeck.com/api/v5/cardinfo.php?set=${widget.link}&sort=level');
+        'https://db.ygoprodeck.com/api/v5/cardinfo.php?set=${widget.link}&sort=atk');
     cardDetail = cardFromJson(response.body);
     return cardDetail;
   }
@@ -39,21 +39,31 @@ class _CardListState extends State<CardList> {
     return ListView.builder(
       itemCount: cardDetail.length,
       itemBuilder: (context, index) {
-        return Card(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: ListTile(
-              leading:
-                  Image.network(cardDetail[index].cardImages[0].imageUrlSmall),
-              title: Text(cardDetail[index].name),
-              trailing: Icon(Icons.chevron_right),
-              onTap: () {
-                navigate(context, index);
-              },
-            ),
-          ),
-        );
+        return _card(index);
       },
+    );
+  }
+
+  Widget _card(index) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: ListTile(
+          leading: Image.network(cardDetail[index].cardImages[0].imageUrl),
+          title: Text(cardDetail[index].name),
+          subtitle: Row(
+            children: <Widget>[
+              cardDetail[index].atk != null
+                  ? Text('${cardDetail[index].atk}/${cardDetail[index].def}')
+                  : Text(cardDetail[index].type)
+            ],
+          ),
+          trailing: Icon(Icons.chevron_right),
+          onTap: () {
+            navigate(context, index);
+          },
+        ),
+      ),
     );
   }
 

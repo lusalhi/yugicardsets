@@ -13,6 +13,7 @@ class CardDetail {
   String id;
   String name;
   String type;
+  String race;
   String desc;
   String atk;
   String def;
@@ -26,6 +27,10 @@ class CardDetail {
     this.name,
     this.type,
     this.desc,
+    this.race,
+    this.atk,
+    this.def,
+    this.level,
     this.cardSets,
     this.cardImages,
     this.cardPrices,
@@ -35,7 +40,11 @@ class CardDetail {
         id: json["id"],
         name: json["name"],
         type: json["type"],
+        race: json["race"],
         desc: json["desc"],
+        atk: json["atk"],
+        def: json["def"],
+        level: json["level"],
         cardSets: new List<CardSet>.from(
             json["card_sets"].map((x) => CardSet.fromJson(x))),
         cardImages: new List<CardImage>.from(
