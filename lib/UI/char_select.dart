@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:yugicardsets/model/set_card_model.dart';
+import '../model/set_card_model.dart';
 import 'set_card.dart';
 
 class CharPage extends StatelessWidget {
@@ -31,8 +31,8 @@ class CharPage extends StatelessWidget {
         });
   }
 
-  void navigateToCardSet(context, name) {
-    charCheck = name;
+  void navigateToCardSet(context, index) {
+    idx = index;
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -50,20 +50,20 @@ class CharPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Text(
-            'Yami Yugi',
+            charSet[0].name,
             style: TextStyle(fontSize: 35.0, color: Colors.white),
           ),
           Hero(
-            tag: '1',
+            tag: charSet[0].idx,
             child: Image.network(
-              'https://uploads3.yugioh.com/character/3/detail/detail/yamiyugi-l.png?1371744397',
+              charSet[0].link,
               height: 300,
             ),
           ),
           RaisedButton(
             child: Text('Select'),
             onPressed: () {
-              navigateToCardSet(context, 'yugi');
+              navigateToCardSet(context, 0);
             },
           )
         ],
@@ -80,20 +80,20 @@ class CharPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Text(
-            'Seto Kaiba',
+            charSet[1].name,
             style: TextStyle(fontSize: 35.0, color: Colors.white),
           ),
           Hero(
-            tag: '2',
+            tag: charSet[1].idx,
             child: Image.network(
-              'https://uploads4.yugioh.com/character/11/detail/detail/kaib-l.png?1375717119',
+              charSet[1].link,
               height: 300,
             ),
           ),
           RaisedButton(
             child: Text('Select'),
             onPressed: () {
-              navigateToCardSet(context, 'kaiba');
+              navigateToCardSet(context, 1);
             },
           )
         ],
@@ -110,20 +110,20 @@ class CharPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Text(
-            'Joey Wheeler',
+            charSet[2].name,
             style: TextStyle(fontSize: 35.0, color: Colors.white),
           ),
           Hero(
-            tag: '3',
+            tag: charSet[2].idx,
             child: Image.network(
-              'https://uploads2.yugioh.com/character/5/detail/detail/joey-l.png?1375717061',
+              charSet[2].link,
               height: 300,
             ),
           ),
           RaisedButton(
             child: Text('Select'),
             onPressed: () {
-              navigateToCardSet(context, 'joey');
+              navigateToCardSet(context, 2);
             },
           )
         ],
@@ -146,16 +146,19 @@ class CharPage extends StatelessWidget {
           )
         ],
       ),
-      body: Container(
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          children: <Widget>[
-            yugiContainer(context),
-            kaibaContainer(context),
-            joeyContainer(context)
-          ],
+      body: ListView(children: [
+        Container(
+          height: 600,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: <Widget>[
+              yugiContainer(context),
+              kaibaContainer(context),
+              joeyContainer(context)
+            ],
+          ),
         ),
-      ),
+      ]),
     );
   }
 }

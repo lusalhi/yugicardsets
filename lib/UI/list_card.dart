@@ -4,25 +4,18 @@ import 'package:yugicardsets/model/card_list_model.dart';
 
 import 'package:http/http.dart' as http;
 
-class CardList extends StatefulWidget {
+class CardList extends StatelessWidget {
   final link;
   CardList(this.link);
 
-  @override
-  _CardListState createState() => _CardListState();
-}
-
-class _CardListState extends State<CardList> {
   Future<List<CardDetail>> fetchInventPosts() async {
     final response = await http.get(
-        'https://db.ygoprodeck.com/api/v5/cardinfo.php?set=${widget.link}&sort=atk');
+        'https://db.ygoprodeck.com/api/v5/cardinfo.php?set=$link&sort=atk');
     cardDetail = cardFromJson(response.body);
     return cardDetail;
   }
 
-  @override
   void dispose() {
-    super.dispose();
     cardDetail.clear();
   }
 
@@ -39,12 +32,12 @@ class _CardListState extends State<CardList> {
     return ListView.builder(
       itemCount: cardDetail.length,
       itemBuilder: (context, index) {
-        return _card(index);
+        return _card(context, index);
       },
     );
   }
 
-  Widget _card(index) {
+  Widget _card(context, index) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -71,7 +64,7 @@ class _CardListState extends State<CardList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.link),
+        title: Text(link),
       ),
       body: FutureBuilder(
         future: fetchInventPosts(),

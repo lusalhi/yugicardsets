@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yugicardsets/model/set_card_model.dart';
+import '../model/set_card_model.dart';
 import 'list_card.dart';
 
 class Cardsets extends StatelessWidget {
@@ -13,23 +13,14 @@ class Cardsets extends StatelessWidget {
 
   Widget flexibleSpace() {
     return FlexibleSpaceBar(
-      title: Text(charCheck == 'yugi'
-          ? "Yugi's Card Set"
-          : charCheck == 'kaiba' ? "Kaiba's Card Set" : "Joey's Card Set"),
+      title: Text(charSet[idx].title),
       centerTitle: true,
       background: Hero(
-          tag: charCheck == 'yugi' ? "1" : charCheck == 'kaiba' ? "2" : "3",
-          child: charCheck == 'yugi'
-              ? Image.network(
-                  'https://uploads3.yugioh.com/character/3/detail/detail/yamiyugi-l.png?1371744397',
-                )
-              : charCheck == 'kaiba'
-                  ? Image.network(
-                      'https://uploads4.yugioh.com/character/11/detail/detail/kaib-l.png?1375717119',
-                    )
-                  : Image.network(
-                      'https://uploads2.yugioh.com/character/5/detail/detail/joey-l.png?1375717061',
-                    )),
+        tag: charSet[idx].idx,
+        child: Image.network(
+          charSet[idx].link,
+        ),
+      ),
     );
   }
 
@@ -37,27 +28,20 @@ class Cardsets extends StatelessWidget {
     return SliverList(
       delegate: SliverChildBuilderDelegate((context, index) {
         return _listTile(context, index);
-      },
-          childCount: charCheck == 'yugi'
-              ? yugiCard.length
-              : charCheck == 'kaiba' ? kaibaCard.length : joeyCard.length),
+      }, childCount: charSet[idx].list.length),
     );
   }
 
   Widget _listTile(context, index) {
     return ListTile(
       contentPadding: EdgeInsets.all(10),
-      title: Text(charCheck == 'yugi'
-          ? yugiCard[index]
-          : charCheck == 'kaiba' ? kaibaCard[index] : joeyCard[index]),
+      title: Text(charSet[idx].list[index]),
       trailing: Icon(Icons.chevron_right),
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => CardList(charCheck == 'yugi'
-                ? yugiCard[index]
-                : charCheck == 'kaiba' ? kaibaCard[index] : joeyCard[index]),
+            builder: (context) => CardList(charSet[idx].list[index]),
           ),
         );
       },

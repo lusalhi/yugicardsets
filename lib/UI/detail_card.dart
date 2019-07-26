@@ -4,27 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:yugicardsets/model/card_list_model.dart';
 
-class DetailCard extends StatefulWidget {
+class DetailCard extends StatelessWidget {
   final index;
   DetailCard(this.index);
-
-  @override
-  _DetailCardState createState() => _DetailCardState();
-}
-
-class _DetailCardState extends State<DetailCard> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
-  _DetailCardState() {
-    scheduleMicrotask(
-      () => _scaffoldKey.currentState.showSnackBar(
-            SnackBar(
-              content: Text('${cardDetail[widget.index].name} selected!'),
-              duration: Duration(seconds: 2),
-            ),
-          ),
-    );
-  }
 
   Widget _detailContainer() {
     return Container(
@@ -40,7 +23,7 @@ class _DetailCardState extends State<DetailCard> {
       flex: 7,
       child: Container(
         child: Image.network(
-          cardDetail[widget.index].cardImages[0].imageUrl,
+          cardDetail[index].cardImages[0].imageUrl,
         ),
       ),
     );
@@ -87,9 +70,7 @@ class _DetailCardState extends State<DetailCard> {
             style: TextStyle(
                 fontSize: 20, color: Colors.blue, fontWeight: FontWeight.w500),
           ),
-          Text(cardDetail[widget.index].atk == null
-              ? '-'
-              : cardDetail[widget.index].atk),
+          Text(cardDetail[index].atk == null ? '-' : cardDetail[index].atk),
         ],
       ),
     );
@@ -105,9 +86,7 @@ class _DetailCardState extends State<DetailCard> {
             style: TextStyle(
                 fontSize: 20, color: Colors.blue, fontWeight: FontWeight.w500),
           ),
-          Text(cardDetail[widget.index].def == null
-              ? '-'
-              : cardDetail[widget.index].def),
+          Text(cardDetail[index].def == null ? '-' : cardDetail[index].def),
         ],
       ),
     );
@@ -123,7 +102,7 @@ class _DetailCardState extends State<DetailCard> {
             style: TextStyle(
                 fontSize: 20, color: Colors.blue, fontWeight: FontWeight.w500),
           ),
-          Text(cardDetail[widget.index].type),
+          Text(cardDetail[index].type),
         ],
       ),
     );
@@ -139,7 +118,7 @@ class _DetailCardState extends State<DetailCard> {
             style: TextStyle(
                 fontSize: 20, color: Colors.blue, fontWeight: FontWeight.w500),
           ),
-          Text(cardDetail[widget.index].race),
+          Text(cardDetail[index].race),
         ],
       ),
     );
@@ -155,9 +134,7 @@ class _DetailCardState extends State<DetailCard> {
             style: TextStyle(
                 fontSize: 20, color: Colors.blue, fontWeight: FontWeight.w500),
           ),
-          Text(cardDetail[widget.index].level == null
-              ? '-'
-              : cardDetail[widget.index].level),
+          Text(cardDetail[index].level == null ? '-' : cardDetail[index].level),
         ],
       ),
     );
@@ -193,7 +170,7 @@ class _DetailCardState extends State<DetailCard> {
               ),
               _space15(),
               Text(
-                cardDetail[widget.index].desc,
+                cardDetail[index].desc,
                 style: TextStyle(color: Colors.white, fontSize: 18),
               ),
             ],
@@ -205,18 +182,33 @@ class _DetailCardState extends State<DetailCard> {
 
   @override
   Widget build(BuildContext context) {
+    scheduleMicrotask(
+      () => _scaffoldKey.currentState.showSnackBar(
+        SnackBar(
+          content: Text('${cardDetail[index].name} selected!'),
+          duration: Duration(seconds: 2),
+        ),
+      ),
+    );
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text(cardDetail[widget.index].name),
+        title: Text(cardDetail[index].name),
         centerTitle: true,
       ),
-      body: Container(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          children: <Widget>[_detailContainer(), _divider(), _descContainer()],
+      body: ListView(children: [
+        Container(
+          height: 750,
+          padding: EdgeInsets.all(10),
+          child: Column(
+            children: <Widget>[
+              _detailContainer(),
+              _divider(),
+              _descContainer()
+            ],
+          ),
         ),
-      ),
+      ]),
     );
   }
 }
